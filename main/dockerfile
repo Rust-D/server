@@ -1,0 +1,13 @@
+FROM python
+
+WORKDIR /app
+COPY ./sorce/ /app/
+
+RUN pip install Flask
+RUN pip install pandas
+RUN pip install sqlalchemy
+RUN pip install PyMySQL
+RUN pip install mysql-connector-python
+
+
+CMD ["python", "main.py"]
