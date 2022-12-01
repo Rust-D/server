@@ -5,13 +5,23 @@ services:
     image: hack-u-main
     build: ./main/
     container_name: hack-u-main
-    # volumes:
-    #  - ./main/sorce/:/app/
     ports:
      - 5000:5000
     depends_on:
      - mysql
     tty: true
+
+  
+  model:
+    image: hack-u-model
+    build: ./model/
+    container_name: hack-u-model
+    expose:
+     - 5050
+    depends_on:
+     - mysql
+    tty: True
+
   
   mysql:
     image: hack-u-mysql
@@ -25,6 +35,8 @@ services:
     volumes:
       - ./db/initdb.d:/docker-entrypoint-initdb.d
     tty: True
+
+
 
   # react:
   #   build:

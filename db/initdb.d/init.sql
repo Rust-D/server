@@ -6,5 +6,5 @@ CREATE TABLE presents
 (
   id             INT PRIMARY KEY AUTO_INCREMENT,
   user_id        INT,
-  month          INT
+  age            INT
 );

@@ -11,12 +11,12 @@ def conn_db():
     return conn
 
 
-def insert(user_id, month):
+def insert(user_id, age):
     conn = conn_db()
     cur = conn.cursor()
-    sql = ("insert into presents (user_id, month)VALUES (%s, %s)")
+    sql = ("insert into presents (user_id, age)VALUES (%s, %s)")
 
-    cur.execute(sql, (user_id, month))
+    cur.execute(sql, (user_id, age))
 
     conn.commit()
 

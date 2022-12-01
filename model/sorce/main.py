@@ -3,6 +3,7 @@ import schedule
 from time import sleep
 import pandas
 import db
+from model import Model
 
 app = Flask(__name__)
 model = Model() #class名 Model

@@ -16,19 +16,18 @@ def recommend():
     return(requests.json())
 
     # dataをモデルコンテナのAPIにpostしてそのレスポンスデータをレスポンスする処理をかく
-    # http://hack-u-model:5050/model/recommend　にpostするはず
 
 @app.route("/questionnaire/userRes")
 def userRes():
 
-     # {"user_id":"5","month":"8"}てきなリクエストが飛んでくる
+     # {"user_id":"5","age":"8"}てきなリクエストが飛んでくる
 
     j_data = request.get_json()
 
     user_id    =  j_data['user_id']
-    month      =  j_data['month']
+    age      =  j_data['age']
 
-    db.insert(user_id, month)
+    db.insert(user_id, age)
 
     return jsonify({"massege": "OK"}), 200
 
