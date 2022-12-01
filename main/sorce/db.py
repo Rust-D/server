@@ -1,10 +1,4 @@
-import pandas as pd
-import sqlalchemy as sa
 import mysql.connector as mydb
-
-url = f'mysql+pymysql://root:pass@hack-u-mysql:3306/hack-u-db?charset=utf8'
-
-engine = sa.create_engine(url, echo=False)
 
 def conn_db():
     conn = mydb.connect(
@@ -16,10 +10,6 @@ def conn_db():
     )
     return conn
 
-def make_df(user_id):
-    query = f"select * from presents where user_id = {user_id}"
-    df = pd.read_sql(query, con=engine)
-    return df
 
 def insert(user_id, month):
     conn = conn_db()
