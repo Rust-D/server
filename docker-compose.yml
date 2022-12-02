@@ -52,3 +52,6 @@ services:
   #   depends_on:
   #    - mysql
   #   tty: True
+
+  # $ docker-compose run --rm react sh -c "create-react-app react-sample"のコマンドを打つ sorce/react-sample
+  # そのあとdocker-compose up

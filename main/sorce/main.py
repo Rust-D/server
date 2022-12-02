@@ -12,10 +12,9 @@ app = Flask(__name__)
 @app.route("/recommend")
 def recommend():
     data = request.get_json()
+
     requests = requests.post('http://hack-u-model:5050/model/recommend', json=data)
     return(requests.json())
-
-    # dataをモデルコンテナのAPIにpostしてそのレスポンスデータをレスポンスする処理をかく
 
 @app.route("/questionnaire/userRes")
 def userRes():
@@ -24,7 +23,7 @@ def userRes():
 
     j_data = request.get_json()
 
-    user_id    =  j_data['user_id']
+    user_id  =  j_data['user_id']
     age      =  j_data['age']
 
     db.insert(user_id, age)

@@ -19,7 +19,7 @@ def recommend():
     # {"col1":{"user_id":"5","month":"8"}}
 
 def make_model():
-    df : pandas.DataFrame = db.make_df()
+    df : pandas.DataFrame = db.select_df()
     return model.make_model(df)
 
 if __name__ == "__main__":
