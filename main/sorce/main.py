@@ -19,14 +19,21 @@ def recommend():
 @app.route("/questionnaire/userRes")
 def userRes():
 
-     # {"user_id":"5","age":"8"}てきなリクエストが飛んでくる
-
     j_data = request.get_json()
 
-    user_id  =  j_data['user_id']
-    age      =  j_data['age']
+    moneyMin      =  j_data['moneyMin']
+    moneyMax      =  j_data['moneyMax']
+    age           =  j_data['age']
+    sex           =  j_data['sex']
+    relationship  =  j_data['relationship']
+    topic1        =  j_data['topic1']
+    topic2        =  j_data['topic2']
+    topic3        =  j_data['topic3']
+    topic4        =  j_data['topic4']
+    topic5        =  j_data['topic5']  
+    UserRes       =  j_data['UserRes']
 
-    db.insert(user_id, age)
+    db.insert(moneyMin, moneyMax, age, sex, relationship, topic1, topic2, topic3, topic4, topic5, UserRes)
 
     return jsonify({"massege": "OK"}), 200
 

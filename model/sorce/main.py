@@ -3,10 +3,8 @@ import schedule
 from time import sleep
 import pandas
 import db
-from model import Model
 
 app = Flask(__name__)
-model = Model() #class名 Model
 
 @app.route("/model/recommend", methods=["POST"]) # 機械学習にレコメンドさせてるとこ
 def recommend():
@@ -16,10 +14,7 @@ def recommend():
 
     present_list = model.pred(profile)
     return jsonify(present_list), 200
-    # {"col1":{"user_id":"5","month":"8"}}
 
-
-# 書き直し dbから学習データとってくる
 def make_model():
     df : pandas.DataFrame = db.select_df()
     return model.make_model(df)
