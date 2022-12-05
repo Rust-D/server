@@ -44,11 +44,11 @@ services:
   #     dockerfile: dockerfile
   #   container_name: sample-react-container
   #   image: sample-react-image
-  #   command: sh -c "cd react-sample && yarn start"
+  #   command: sh -c "cd react-sample && yarn && yarn start"
   #   ports:
   #   - "3000:3000"
   #   volumes:
-  #   - ./React/source/:/app/
+  #   - ./React/:/app/
   #   depends_on:
   #    - mysql
   #   tty: True
