@@ -7,7 +7,7 @@ CREATE TABLE user_res
   money_max        INT,
   age              INT,
   sex              INT,
-  relationship     INT,
+  season           INT,
   topic1           BOOLEAN,
   topic2           BOOLEAN,
   topic3           BOOLEAN,
