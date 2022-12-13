@@ -1,5 +1,5 @@
 name,moneyMin,moneyMax,age,sex,season,topic1,topic2,topic3,topic4,topic5
-pokemon sv,0,0,1,1,1,1
+pokemon sv,0,0,1,1,1,1,0,0,1,0
 topgun,0,0,0,1,0,0,0,0,0,0
 monitor,1,0,1,0,0,1,1,1,1,1
 haagen dazs,0,0,0,1,1,1,0,0,1,1
@@ -12,4 +12,3 @@ ippan,1,0,1,0,0,1,1,1,0,1
 sungyo,0,0,1,0,0,1,0,1,0,1
 syamu-game,0,0,0,0,0,0,0,0,0,0
 nonomura-ryutato,1,0,1,0,1,0,1,1,0,1
-noel, 1,0,1,0,1,0,1,1,1,1

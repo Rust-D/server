@@ -4,10 +4,11 @@ WORKDIR /app
 COPY ./sorce/ /app/
 
 RUN pip install Flask
-RUN pip install pandas
 RUN pip install sqlalchemy
 RUN pip install PyMySQL
 RUN pip install schedule
+
+RUN pip install pandas
 RUN pip install xgboost
 RUN pip install numpy
 RUN pip install scikit-learn

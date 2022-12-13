@@ -1,18 +1,23 @@
 from flask import Flask, request, jsonify
 import schedule
 from time import sleep
-import pandas
+import pandas as pd
 import db
+import copy
+import xgboost as xgb
+import numpy as np
+from sklearn.preprocessing import StandardScaler
+from sklearn.cluster import KMeans
 
 import model_t1
 
 app = Flask(__name__)
 
 Topic = [0] * 5
+a_model = model_t1.AModel()
 
 @app.route("/model/recommend") # 機械学習にレコメンドさせてるとこ
 def recommend():
-    model = model_t1.AModel()
     data = request.get_json()
 
     moneyMin      =  data['moneyMin']
@@ -65,32 +70,41 @@ def recommend():
     u_data=[[moneyMin, moneyMax, Age, Sex, Season, Topic[0], Topic[1], Topic[2], Topic[3], Topic[4]]]
     culum=['moneyMin', 'moneyMax','age', 'sex', 'season', 'topic1', 'topic2', 'topic3', 'topic4', 'topic5']
 
-    profile:pandas.DataFrame = pandas.DataFrame(u_data, columns=culum)
+    profile:pd.DataFrame = pd.DataFrame(u_data, columns=culum)
 
     print (profile)
 
-    present_list = model.pred(profile)
+    present_list = a_model.pred(profile)
 
     print(present_list)
 
     # return jsonify({"massage" : "ok"})
-    return jsonify({"recomends": present_list}), 200
-
-def make_model():
-    model = model_t1.AModel()
-    df : pandas.DataFrame = db.select_df()
-    return model.make_model(df)
+    return jsonify({
+        "recomends": 
+        [
+            {"name" : present_list[0]}, 
+            {"name" : present_list[1]}, 
+            {"name" : present_list[2]}, 
+            {"name" : present_list[3]}, 
+            {"name" : present_list[4]}
+        ]
+        }), 200
 
 if __name__ == "__main__":
+    path = 'model.csv'
+    _input_df = pd.read_csv(path)
+
+    a_model.make_model(_input_df)    
 
     app.run(host="0.0.0.0", port=5050, debug=True)
-    path = 'model.csv'
-    _input_df = pandas.read_csv(path)
 
-    a_model = model_t1.AModel()
-    a_model.make_model(_input_df)
+    
+    # def make_model():
+    #     model = model_t1.AModel()
+    #     df : pd.DataFrame = db.select_df()
+    #     return model.make_model(df)
 
-    schedule.every(1).day.do(make_model)
-    while True:
-        schedule.run_pending()
-        sleep(1)
+    # schedule.every(1).day.do(make_model)
+    # while True:
+    #     schedule.run_pending()
+    #     sleep(1)
