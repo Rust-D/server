@@ -81,7 +81,7 @@ def userRes():
 @app.route('/test', methods= ["POST"])
 def test() :
 
-    return jsonify({"recommends" : ["suh", "jhsg", "hjsg", "hgsf", "jhg", "gvj"]})
+    return jsonify({"recommends" : [{"name" : "suh"},{"name" : "jhsg"}, {"name" : "hjhu"}, {"name" : "hguu"}, {"name" : "hugu"}, {"name" : "hujhvu"}]})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

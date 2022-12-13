@@ -4,7 +4,7 @@ from time import sleep
 import pandas
 import db
 
-from model_t1 import AModel
+import model_t1
 
 app = Flask(__name__)
 
@@ -12,7 +12,7 @@ Topic = [0] * 5
 
 @app.route("/model/recommend") # 機械学習にレコメンドさせてるとこ
 def recommend():
-    model = AModel()
+    model = model_t1.AModel()
     data = request.get_json()
 
     moneyMin      =  data['moneyMin']
@@ -77,7 +77,7 @@ def recommend():
     return jsonify({"recomends": present_list}), 200
 
 def make_model():
-    model = AModel()
+    model = model_t1.AModel()
     df : pandas.DataFrame = db.select_df()
     return model.make_model(df)
 
@@ -87,7 +87,7 @@ if __name__ == "__main__":
     path = 'model.csv'
     _input_df = pandas.read_csv(path)
 
-    a_model = AModel()
+    a_model = model_t1.AModel()
     a_model.make_model(_input_df)
 
     schedule.every(1).day.do(make_model)
