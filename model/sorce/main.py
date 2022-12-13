@@ -3,7 +3,6 @@ import schedule
 from time import sleep
 import pandas
 import db
-import xgboost as xgb
 
 from model_t1 import AModel
 
