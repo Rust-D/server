@@ -99,12 +99,12 @@ if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5050, debug=True)
 
     
-    # def make_model():
-    #     model = model_t1.AModel()
-    #     df : pd.DataFrame = db.select_df()
-    #     return model.make_model(df)
+    def make_model():
+        model = model_t1.AModel()
+        df : pd.DataFrame = db.select_df()
+        return model.make_model(df)
 
-    # schedule.every(1).day.do(make_model)
-    # while True:
-    #     schedule.run_pending()
-    #     sleep(1)
+    schedule.every(1).day.do(make_model)
+    while True:
+        schedule.run_pending()
+        sleep(1)
