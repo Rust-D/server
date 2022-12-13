@@ -6,21 +6,20 @@ import db
 
 from model_t1 import AModel
 
-model = AModel
-
 app = Flask(__name__)
 
-Topic = [False] * 5
+Topic = [0] * 5
 
 @app.route("/model/recommend") # 機械学習にレコメンドさせてるとこ
 def recommend():
     data = request.get_json()
+    model = AModel
 
 # {
 #     "moneyMin": 1000,
 #     "moneyMax": 10000,
 #     "age":      "around_10",
-#     "sex":      "mare",
+#     "sex":      "male",
 #     "season":   "spring",
 #     "topic":    ["fashion", "sports"]
 # }
@@ -62,25 +61,32 @@ def recommend():
         Season = 4
     
     if 'fashion' in topic:
-        Topic[0] = True
+        Topic[0] = 1
     if 'dailyNecessities' in topic:
-        Topic[1] = True
+        Topic[1] = 1
     if 'food' in topic:
-        Topic[2] = True
+        Topic[2] = 1
     if 'sports' in topic:
-        Topic[3] = True
+        Topic[3] = 1
     if 'entertainment' in topic:
-        Topic[4] = True
+        Topic[4] = 1
 
     u_data=[[moneyMin, moneyMax, Age, Sex, Season, Topic[0], Topic[1], Topic[2], Topic[3], Topic[4]]]
     culum=['moneyMin', 'moneyMax','age', 'sex', 'season', 'topic1', 'topic2', 'topic3', 'topic4', 'topic5']
 
-    profile:pandas.DataFrame = pandas.DataFrame(u_data, culumns=culum)
+    profile:pandas.DataFrame = pandas.DataFrame(u_data, columns=culum)
+
+    print (profile)
 
     present_list = model.pred(profile)
+
+    print(present_list)
+
+    # return jsonify({"massage" : "ok"})
     return jsonify({"recomends": present_list}), 200
 
 def make_model():
+    model = AModel
     df : pandas.DataFrame = db.select_df()
     return model.make_model(df)
 

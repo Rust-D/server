@@ -14,12 +14,12 @@ CORS(app)
 
 Topic = [False] * 5
 
-@app.route("/recommend")
+@app.route("/recommend", methods=["POST"])
 def recommend():
     data = request.get_json()
 
-    requests = requests.get('http://hack-u-model:5050/model/recommend', json=data)
-    return(requests.json())
+    res = requests.get('http://hack-u-model:5050/model/recommend', json=data)
+    return(res.json())
 
 @app.route("/questionnaire/userRes")
 def userRes():

@@ -40,7 +40,7 @@ class AModel:
             'random_state': 1,
             'num_class': num_class
         }
-        num_round = 50
+        num_round = 10
 
         model = xgb.train(params, dtrain, num_round)
 
@@ -76,8 +76,8 @@ if __name__ == '__main__':
     _input_df = pd.read_csv(path)
 
     #受け取ったデータをlにいれる
-    l = [[1,1,1,1,2]]
-    sample = pd.DataFrame(l, columns=['topic', 'gender', 'age','relation','budget'])
+    l = [[2,2,1,1,1,1,1,1,1,1]]
+    sample = pd.DataFrame(l, columns=['moneyMin','moneyMax','age','sex','season','topic1','topic2','topic3','topic4','topic5'])
 
     a_model = AModel()
     a_model.make_model(_input_df)

@@ -9,6 +9,6 @@ engine = sa.create_engine(url, echo=False)
 
 
 def select_df():
-    query = f"select * from presents"
+    query = f"select * from user_res"
     df = pd.read_sql(query, con=engine)
     return df

@@ -17,7 +17,7 @@ services:
     build: ./model/
     container_name: hack-u-model
     ports:
-     - 5050
+     - 5050:5050
     expose:
      - 5050
     depends_on:
