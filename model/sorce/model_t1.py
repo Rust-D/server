@@ -72,7 +72,8 @@ class AModel:
 
 
 if __name__ == '__main__':
-    path = 'rust-d\model.csv'
+
+    path = 'model.csv'
     _input_df = pd.read_csv(path)
 
     #受け取ったデータをlにいれる

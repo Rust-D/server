@@ -3,6 +3,7 @@ import schedule
 from time import sleep
 import pandas
 import db
+import xgboost as xgb
 
 from model_t1 import AModel
 
@@ -12,17 +13,8 @@ Topic = [0] * 5
 
 @app.route("/model/recommend") # 機械学習にレコメンドさせてるとこ
 def recommend():
+    model = AModel()
     data = request.get_json()
-    model = AModel
-
-# {
-#     "moneyMin": 1000,
-#     "moneyMax": 10000,
-#     "age":      "around_10",
-#     "sex":      "male",
-#     "season":   "spring",
-#     "topic":    ["fashion", "sports"]
-# }
 
     moneyMin      =  data['moneyMin']
     moneyMax      =  data['moneyMax']
@@ -86,12 +78,19 @@ def recommend():
     return jsonify({"recomends": present_list}), 200
 
 def make_model():
-    model = AModel
+    model = AModel()
     df : pandas.DataFrame = db.select_df()
     return model.make_model(df)
 
 if __name__ == "__main__":
+
     app.run(host="0.0.0.0", port=5050, debug=True)
+    path = 'model.csv'
+    _input_df = pandas.read_csv(path)
+
+    a_model = AModel()
+    a_model.make_model(_input_df)
+
     schedule.every(1).day.do(make_model)
     while True:
         schedule.run_pending()
