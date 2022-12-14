@@ -8,7 +8,7 @@ import xgboost as xgb
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
-from flask_cores import CORS
+from flask_cors import CORS
 
 import model_t1
 

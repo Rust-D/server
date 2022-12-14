@@ -3,14 +3,17 @@ import pandas
 import db
 import requests
 
-from flask_cores import CORS
+from flask_cors import CORS
 # from Model import model 
 
 # 診断結果をdbにインサートするAPI
 # レコメンドするAPI
 
 app = Flask(__name__)
+api = Flask(__name__)
+
 CORS(app)
+
 @api.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Headers' 'Content-Type,Authorization')
