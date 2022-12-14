@@ -8,13 +8,21 @@ import xgboost as xgb
 import numpy as np
 from sklearn.preprocessing import StandardScaler
 from sklearn.cluster import KMeans
+from flask_cores import CORS
 
 import model_t1
 
 app = Flask(__name__)
+CORS(app)
 
 Topic = [0] * 5
 a_model = model_t1.AModel()
+
+@app.route('/test', methods= ["POST"])
+def test() :
+
+    return jsonify({"recommends" : [{"name" : "suh"},{"name" : "jhsg"}, {"name" : "hjhu"}, {"name" : "hguu"}, {"name" : "hugu"}, {"name" : "hujhvu"}]})
+
 
 @app.route("/model/recommend") # 機械学習にレコメンドさせてるとこ
 def recommend():

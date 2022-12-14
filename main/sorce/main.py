@@ -3,7 +3,7 @@ import pandas
 import db
 import requests
 
-from flask_cors import CORS
+from flask_cores import CORS
 # from Model import model 
 
 # 診断結果をdbにインサートするAPI
@@ -11,6 +11,10 @@ from flask_cors import CORS
 
 app = Flask(__name__)
 CORS(app)
+@api.after_request
+def after_request(response):
+    response.headers.add('Access-Control-Allow-Headers' 'Content-Type,Authorization')
+    response.headers.add('Access-Control-Allow-Methods' 'GET,POST')
 
 Topic = [False] * 5
 
