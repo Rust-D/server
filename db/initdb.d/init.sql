@@ -8,10 +8,10 @@ CREATE TABLE user_res
   age              INT,
   sex              INT,
   season           INT,
-  topic1           BOOLEAN,
-  topic2           BOOLEAN,
-  topic3           BOOLEAN,
-  topic4           BOOLEAN,
-  topic5           BOOLEAN,
+  topic1           INT,
+  topic2           INT,
+  topic3           INT,
+  topic4           INT,
+  topic5           INT,
   user_res         TEXT
 );

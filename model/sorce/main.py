@@ -3,11 +3,6 @@ import schedule
 from time import sleep
 import pandas as pd
 import db
-import copy
-import xgboost as xgb
-import numpy as np
-from sklearn.preprocessing import StandardScaler
-from sklearn.cluster import KMeans
 from flask_cors import CORS
 
 import model_t1
@@ -17,12 +12,6 @@ CORS(app)
 
 Topic = [0] * 5
 a_model = model_t1.AModel()
-
-@app.route('/test', methods= ["POST"])
-def test() :
-
-    return jsonify({"recommends" : [{"name" : "suh"},{"name" : "jhsg"}, {"name" : "hjhu"}, {"name" : "hguu"}, {"name" : "hugu"}, {"name" : "hujhvu"}]})
-
 
 @app.route("/model/recommend") # 機械学習にレコメンドさせてるとこ
 def recommend():
@@ -36,33 +25,33 @@ def recommend():
     topic         =  data['topic']
 
     if age == 'around_10':
-        Age = 1
+        Age = 0
     elif age == 'around_20':
-        Age = 2
+        Age = 1
     elif age == 'around_30':
-        Age = 3
+        Age = 2
     elif age == 'around_40':
-        Age = 4
+        Age = 3
     elif age == 'around_50':
-        Age = 5
+        Age = 4
     else:
-        Age = 6
+        Age = 5
 
     if sex == 'male':
-        Sex = 1
+        Sex = 0
     elif sex == 'female':
-        Sex = 2
+        Sex = 1
     else:
-        Sex = 3
+        Sex = 2
 
     if season == 'spring':
-        Season = 1
+        Season = 0
     elif season == 'summer':
-        Season = 2
+        Season = 1
     elif season == 'autumn':
-        Season = 3
+        Season = 2
     else:
-        Season = 4
+        Season = 3
     
     if 'fashion' in topic:
         Topic[0] = 1
@@ -75,7 +64,7 @@ def recommend():
     if 'entertainment' in topic:
         Topic[4] = 1
 
-    u_data=[[moneyMin, moneyMax, Age, Sex, Season, Topic[0], Topic[1], Topic[2], Topic[3], Topic[4]]]
+    u_data=[[int(moneyMin), int(moneyMax), Age, Sex, Season, Topic[0], Topic[1], Topic[2], Topic[3], Topic[4]]]
     culum=['moneyMin', 'moneyMax','age', 'sex', 'season', 'topic1', 'topic2', 'topic3', 'topic4', 'topic5']
 
     profile:pd.DataFrame = pd.DataFrame(u_data, columns=culum)
@@ -86,15 +75,15 @@ def recommend():
 
     print(present_list)
 
-    # return jsonify({"massage" : "ok"})
     return jsonify({
-        "recomends": 
+        "recommends": 
         [
             {"name" : present_list[0]}, 
             {"name" : present_list[1]}, 
             {"name" : present_list[2]}, 
             {"name" : present_list[3]}, 
-            {"name" : present_list[4]}
+            {"name" : present_list[4]},
+            {"name" : present_list[5]}
         ]
         }), 200
 

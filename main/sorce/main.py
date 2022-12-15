@@ -1,13 +1,8 @@
 from flask import Flask, request, jsonify
-import pandas
 import db
 import requests
 
 from flask_cors import CORS
-# from Model import model 
-
-# 診断結果をdbにインサートするAPI
-# レコメンドするAPI
 
 app = Flask(__name__)
 api = Flask(__name__)
@@ -19,7 +14,7 @@ def after_request(response):
     response.headers.add('Access-Control-Allow-Headers' 'Content-Type,Authorization')
     response.headers.add('Access-Control-Allow-Methods' 'GET,POST')
 
-Topic = [False] * 5
+Topic = [0] * 5
 
 @app.route("/recommend", methods=["POST"])
 def recommend():
@@ -42,53 +37,48 @@ def userRes():
     UserRes       =  j_data['UserRes']
 
     if age == 'around_10':
-        Age = 1
+        Age = 0
     elif age == 'around_20':
-        Age = 2
+        Age = 1
     elif age == 'around_30':
-        Age = 3
+        Age = 2
     elif age == 'around_40':
-        Age = 4
+        Age = 3
     elif age == 'around_50':
-        Age = 5
+        Age = 4
     else:
-        Age = 6
+        Age = 5
 
     if sex == 'male':
-        Sex = 1
+        Sex = 0
     elif sex == 'female':
-        Sex = 2
+        Sex = 1
     else:
-        Sex = 3
+        Sex = 2
 
     if season == 'spring':
-        Season = 1
+        Season = 0
     elif season == 'summer':
-        Season = 2
+        Season = 1
     elif season == 'autumn':
-        Season = 3
+        Season = 2
     else:
-        Season = 4
+        Season = 3
     
     if 'fashion' in topic:
-        Topic[0] = True
+        Topic[0] = 1
     if 'dailyNecessities' in topic:
-        Topic[1] = True
+        Topic[1] = 1
     if 'food' in topic:
-        Topic[2] = True
+        Topic[2] = 1
     if 'sports' in topic:
-        Topic[3] = True
+        Topic[3] = 1
     if 'entertainment' in topic:
-        Topic[4] = True
+        Topic[4] = 1
 
     db.insert(moneyMin, moneyMax, Age, Sex, Season, Topic[0], Topic[1], Topic[2], Topic[3], Topic[4], UserRes)
 
     return jsonify({"massege": "OK"}), 200
-
-@app.route('/test', methods= ["POST"])
-def test() :
-
-    return jsonify({"recommends" : [{"name" : "suh"},{"name" : "jhsg"}, {"name" : "hjhu"}, {"name" : "hguu"}, {"name" : "hugu"}, {"name" : "hujhvu"}]})
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)

@@ -4,7 +4,6 @@ WORKDIR /app
 COPY ./sorce/ /app/
 
 RUN pip install Flask
-RUN pip install pandas
 RUN pip install mysql-connector-python
 RUN pip install requests 
 RUN pip install flask-cors
