@@ -11,7 +11,7 @@ app = Flask(__name__)
 CORS(app)
 
 Topic = [0] * 5
-a_model = model_t1.AModel()
+a_model = model_t1.Amodel()
 
 @app.route("/model/recommend") # 機械学習にレコメンドさせてるとこ
 def recommend():
