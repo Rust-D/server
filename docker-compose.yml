@@ -11,7 +11,6 @@ services:
      - mysql
     tty: true
 
-  
   model:
     image: hack-u-model
     build: ./model/
@@ -21,8 +20,7 @@ services:
     depends_on:
      - mysql
     tty: True
-
-  
+ 
   mysql:
     image: hack-u-mysql
     build: ./db/
@@ -35,23 +33,3 @@ services:
     volumes:
       - ./db/initdb.d:/docker-entrypoint-initdb.d
     tty: True
-
-
-
-  # react:
-  #   build:
-  #     context: ./React/
-  #     dockerfile: dockerfile
-  #   container_name: sample-react-container
-  #   image: sample-react-image
-  #   command: sh -c "cd react-sample && yarn && yarn start"
-  #   ports:
-  #   - "3000:3000"
-  #   volumes:
-  #   - ./React/:/app/
-  #   depends_on:
-  #    - mysql
-  #   tty: True
-
-  # $ docker-compose run --rm react sh -c "create-react-app react-sample"のコマンドを打つ sorce/react-sample
-  # そのあとdocker-compose up

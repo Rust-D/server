@@ -28,13 +28,13 @@ def userRes():
 
     j_data = request.get_json()
 
-    moneyMin      =  j_data['moneyMin']
-    moneyMax      =  j_data['moneyMax']
-    age           =  j_data['age']
-    sex           =  j_data['sex']
-    season        =  j_data['season']
-    topic         =  j_data['topic']
-    UserRes       =  j_data['UserRes']
+    moneyMin    =  j_data['moneyMin']
+    moneyMax    =  j_data['moneyMax']
+    age         =  j_data['age']
+    sex         =  j_data['sex']
+    season      =  j_data['season']
+    topic       =  j_data['topic']
+    UserRes     =  j_data['UserRes']
 
     if age == 'around_10':
         Age = 0
