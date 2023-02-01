@@ -13,7 +13,8 @@ CORS(app)
 Topic = [0] * 5
 a_model = model_t1.Amodel()
 
-@app.route("/model/recommend") # 機械学習にレコメンドさせてるとこ
+# レコメンドするAPI
+@app.route("/model/recommend")
 def recommend():
     data = request.get_json()
 
@@ -94,8 +95,8 @@ if __name__ == "__main__":
     a_model.make_model(_input_df)    
 
     app.run(host="0.0.0.0", port=5050, debug=True)
-
     
+    # 一日に一回クラスタリング
     def make_model():
         model = model_t1.AModel()
         df : pd.DataFrame = db.select_df()

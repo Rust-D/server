@@ -9,6 +9,7 @@ api = Flask(__name__)
 
 CORS(app)
 
+# クロスオリジンを許可する
 @api.after_request
 def after_request(response):
     response.headers.add('Access-Control-Allow-Headers' 'Content-Type,Authorization')
@@ -16,6 +17,7 @@ def after_request(response):
 
 Topic = [0] * 5
 
+# 推論するときののAPI、機械学習コンテナにリクエストを投げる
 @app.route("/recommend", methods=["POST"])
 def recommend():
     data = request.get_json()
@@ -23,6 +25,7 @@ def recommend():
     res = requests.get('http://hack-u-model:5050/model/recommend', json=data)
     return(res.json())
 
+# 学習データを集めるときのAPI、DBに保存する
 @app.route("/questionnaire/userRes")
 def userRes():
 
